@@ -7,6 +7,6 @@ $TTL 1
 		1D)
 @ 	IN 	NS 	ns.attacker32.com.
 @ 	IN 	A 	10.10.30.6
-www 	IN 	A 	10.10.30.5
+www 	IN 	A 	10.10.30.6
 ns 	IN 	A 	10.10.30.6
 * 	IN 	A 	10.10.30.6
