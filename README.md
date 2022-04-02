@@ -22,7 +22,7 @@ On the attacker machine:
 4. Restart bind9 service and chceck if bind9 is running
 5. Unzip attacker_vm zip
 6. Navigate to attacker_vm folder
-7. Add url prefix 'attacker32.com' to the chamge.js file
+7. Add url prefix 'attacker32.com' to the change.js file
 8. Restart bind9
 
 Switch back to the client VM and refresh www.attacker32.com and continue on the attacker machine
