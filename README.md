@@ -27,7 +27,7 @@ On the attacker machine:
 
 Switch back to the client VM and refresh www.attacker32.com and continue on the attacker machine
 
-9. Change IP address of www.attacker32.com
+9. Change IP address of www.attacker32.com in the /etc/bind/attacker.com.zone
 10. Restart bind9
 
 ### Resources
