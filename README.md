@@ -13,7 +13,22 @@ an attacker can not directly access the IoT device and if he wanted to he will b
 ensures that the user can interact with their server. For IoT device (thermostat) we will give an example of a website called termostat.com. Thanks to a policy of the same origin, the thermostat will be able to communicate with termostat.com. However, if an attacker uses his site (attacker.com) to try to communicate with the Internet of Things server, it is a request from two different sources. This is because the attacker uses attacker.com and thermostat termostat.com. Therefore, the browser does not allow the attacker to retrieve the data. But one thing needs to be realized. The same-origin policy only checks names, not IP addresses. Therefore, if the user could obtain the IP address of the thing, the thermostat, he would be able to set the temperature on it.
 
 ## Tasks
+Firstly you need to start the bash script on the client VM. Start the bash start script - start.sh and after a while the firefox browser should start on. Then visit the attacker website attacker32.com:8080
 
+On the attacker machine:
+1. Go to rebinding_repo
+2. Copy attacker.com.zone to /etc/bind folder
+3. Copy content of _etc_bind to /etc/bind/named.conf
+4. Restart bind9 service and chceck if bind9 is running
+5. Unzip attacker_vm zip
+6. Navigate to attacker_vm folder
+7. Add url prefix 'attacker32.com' to the chamge.js file
+8. Restart bind9
+
+Switch back to the client VM and refresh www.attacker32.com and continue on the attacker machine
+
+9. Change IP address of www.attacker32.com
+10. Restart bind9
 
 ### Resources
 https://seedsecuritylabs.org/Labs_16.04/PDF/DNS_Rebinding.pdf
