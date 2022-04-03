@@ -1,6 +1,6 @@
 # bp-DNS_Rebinding
 
-Here you can download VMs and the resources you need to run the attacker web server site.
+Here you can download VMs and the resources which you need to run the rebinding attack.
 
 ## Introduction
 In this lab, students should gain first-hand experience on how to use the DNS rebinding technique to attack IoT devices. In the topology.png file, you can see that this lab contains 4 virtual machines. First is a router with a 10.10.30.1 IP address, second is a client (the victim) with a 10.10.30.5 IP address, third is an attacker (you) with 10.10.30.6 and last is a server with 10.10.30.7 IP address. Your job is to get access to the thermometer, which is running on the client's virtual machine, and set the temperature.
