@@ -12,22 +12,39 @@ an attacker can not directly access the IoT device and if he wanted to he will b
 ##### The same origin policy - 
 ensures that the user can interact with their server. For IoT device (thermostat) we will give an example of a website called termostat.com. Thanks to a policy of the same origin, the thermostat will be able to communicate with termostat.com. However, if an attacker uses his site (attacker.com) to try to communicate with the Internet of Things server, it is a request from two different sources. This is because the attacker uses attacker.com and thermostat termostat.com. Therefore, the browser does not allow the attacker to retrieve the data. But one thing needs to be realized. The same-origin policy only checks names, not IP addresses. Therefore, if the user could obtain the IP address of the thing, the thermostat, he would be able to set the temperature on it.
 
-## Tasks
-Firstly you need to start the bash script on the client VM. Start the bash start script - start.sh and after a while the firefox browser should start on. Then visit the attacker website attacker32.com:8080
+## Installation
+Firstly, you need to copy this repository into your computer. After downloading access the folder and navigate to the **muni-kypo_VMs** folder. Run this command: 
+<br />
+*create-sandbox --provisioning-dir ./provisioning ./rebinding.yml*
+<br />
+this should create the intermediate sandbox definition. Navigate to the **sandbox** folder and run this command:
+<br />
+*manage-sandbox build*
+<br />
+after a while, three virtual machines will be displayed in the virtual box - router, server-wan and attacker.
+<br />
+Now you need to build the last one - Client. Navigate to **vagrant_VMs/server** folder which is located in your downloaded folder. Run this command:
+<br />
+*vagrant up*
+<br />
+after a while, you should see the Client in the virtual box. For the first time, you turn off this machine and turn it on again. This is important because for the first time this machine does not connect to the network.
 
+## Tasks
+Firstly you need to start the bash script on the client VM. Start the bash start script - start.sh and after a while, the firefox browser should start on. Then visit the attacker website attacker32.com:8080
+<br /><br />
 On the attacker machine:
 1. Go to rebinding_repo
 2. Copy attacker.com.zone to /etc/bind folder
 3. Copy content of _etc_bind to /etc/bind/named.conf
-4. Restart bind9 service and chceck if bind9 is running
+4. Restart bind9 service and check if bind9 is running
 5. Unzip attacker_vm zip
 6. Navigate to attacker_vm folder
-7. Add url prefix 'attacker32.com' to the change.js file
+7. Add URL prefix 'attacker32.com' to the change.js file
 8. Restart bind9
 
 Switch back to the client VM and refresh www.attacker32.com and continue on the attacker machine
 
-9. Change IP address of www.attacker32.com in the /etc/bind/attacker.com.zone
+9. Change the IP address of www.attacker32.com in the /etc/bind/attacker.com.zone
 10. Restart bind9
 
 ### Resources
