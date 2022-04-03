@@ -35,7 +35,7 @@ Firstly you need to start the bash script on the client VM. Start the bash start
 On the attacker machine:
 1. Go to rebinding_repo
 2. Copy attacker.com.zone to /etc/bind folder
-3. Copy content of _etc_bind to /etc/bind/named.conf
+3. Copy content of _etc_bind_attacker to /etc/bind/named.conf
 4. Restart bind9 service and check if bind9 is running
 5. Unzip attacker_vm zip
 6. Navigate to attacker_vm folder
