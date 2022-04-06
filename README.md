@@ -1,51 +1,79 @@
 # bp-DNS_Rebinding
 
-Here you can download VMs and the resources which you need to run the rebinding attack.
+Tu si môžete stiahnuť virtuálne počítače a zdroje, ktoré potrebujete na spustenie opätovného naviazania útoku.
 
-## Introduction
-In this lab, students should gain first-hand experience on how to use the DNS rebinding technique to attack IoT devices. In the topology.png file, you can see that this lab contains 4 virtual machines. First is a router with a 10.10.30.1 IP address, second is a client (the victim) with a 10.10.30.5 IP address, third is an attacker (you) with 10.10.30.6 and last is a server with 10.10.30.7 IP address. Your job is to get access to the thermometer, which is running on the client's virtual machine, and set the temperature.
+## Úvod
+V tomto laboratóriu by študenti mali získať prvé skúsenosti s tým, ako používať techniku ​​rebindingu DNS na útok na zariadenia internetu vecí. V súbore topology.png môžete vidieť, že toto laboratórium obsahuje 4 virtuálne stroje. Prvý je router s IP adresou 10.10.30.1, druhý je klient (obeť) s IP adresou 10.10.30.5, tretí je útočník (vy) s 10.10.30.6 a posledný je server s IP adresou 10.10.30.7 . Vašou úlohou je získať prístup k teplomeru, ktorý beží na virtuálnom stroji klienta, a nastaviť teplotu.
 
-## How DNS rebinding work
-The attack targets Internet of Things (IoT) devices. Many of them do not have very sophisticated protection schemes. If an attacker manages to communicate with these IoT devices, he will likely be able to exploit the vulnerabilities of these devices.
-##### The firewall - 
-an attacker can not directly access the IoT device and if he wanted to he will be blocked by a firewall because this IoT device is a private IP address that is not accessible from the outside. The only way an attacker can access this IoT device is to talk to the IoT device from the local environment. An attacker must be on the same network behind the firewall to access it. This issue could be resolved by a client's visiting the attacker's website. What the attacker has to do is send an e-mail or advertisement to the user and if the user clicks on the given link he will go to the attacker's website.
-##### The same origin policy - 
-ensures that the user can interact with their server. For IoT device (thermostat) we will give an example of a website called termostat.com. Thanks to a policy of the same origin, the thermostat will be able to communicate with termostat.com. However, if an attacker uses his site (attacker.com) to try to communicate with the Internet of Things server, it is a request from two different sources. This is because the attacker uses attacker.com and thermostat termostat.com. Therefore, the browser does not allow the attacker to retrieve the data. But one thing needs to be realized. The same-origin policy only checks names, not IP addresses. Therefore, if the user could obtain the IP address of the thing, the thermostat, he would be able to set the temperature on it.
+## Ako funguje previazanie DNS
+Útok sa zameriava na zariadenia internetu vecí (IoT). Mnohé z nich nemajú veľmi prepracované systémy ochrany. Ak sa útočníkovi podarí komunikovať s týmito IoT zariadeniami, pravdepodobne bude môcť zneužiť zraniteľnosť týchto zariadení.
+##### Firewall -
+Útočník nemôže priamo pristupovať k zariadeniu IoT a ak by chcel, bude zablokovaný firewallom, pretože toto zariadenie IoT je súkromná IP adresa, ktorá nie je prístupná zvonku. Jediný spôsob, ako môže útočník získať prístup k tomuto zariadeniu internetu vecí, je komunikovať so zariadením internetu vecí z miestneho prostredia. Útočník musí byť v rovnakej sieti za bránou firewall, aby sa k nej mohol dostať. Tento problém by sa dal vyriešiť tak, že klient navštívi webovú stránku útočníka. Čo musí útočník urobiť, je poslať používateľovi e-mail alebo reklamu a ak používateľ klikne na daný odkaz, prejde na webovú stránku útočníka.
+##### The same origin policy -
+zaisťuje, že používateľ môže komunikovať so svojím serverom. Pre IoT zariadenie (termostat) uvedieme príklad webovej stránky s názvom termostat.com. Vďaka politike rovnakého pôvodu bude termostat schopný komunikovať s termostat.com. Ak však útočník použije svoju stránku (attacker.com) na pokus o komunikáciu so serverom internetu vecí, ide o požiadavku z dvoch rôznych zdrojov. Je to preto, že útočník používa stránky attacker.com a termostat termostat.com. Prehliadač preto útočníkovi neumožňuje získať údaje. Treba si však uvedomiť jednu vec. Politika rovnakého pôvodu kontroluje iba mená, nie adresy IP. Ak by teda používateľ získal IP adresu veci, termostatu, vedel by si na ňom nastaviť teplotu.
 
-## Installation
-Firstly, you need to copy this repository into your computer. After downloading access the folder and navigate to the **muni-kypo_VMs** folder. Run this command: 
+## Inštalácia
+Najprv musíte skopírovať toto úložisko do počítača. Po stiahnutí prejdite do priečinka a prejdite do priečinka **muni-kypo_VMs**. Spustite tento príkaz:
 <br />
 *create-sandbox --provisioning-dir ./provisioning ./rebinding.yml*
 <br />
-this should create the intermediate sandbox definition. Navigate to the **sandbox** folder and run this command:
+toto by malo vytvoriť prechodnú definíciu karantény. Prejdite do priečinka **sandbox** a spustite tento príkaz:
 <br />
-*manage-sandbox build*
+*spravovať vytvorenie karantény*
 <br />
-after a while, three virtual machines will be displayed in the virtual box - router, server-wan and attacker.
+po chvíli sa vo virtuálnom boxe zobrazia tri virtuálne stroje - router, server-wan a útočník.
 <br />
-Now you need to build the last one - Client. Navigate to **vagrant_VMs/server** folder which is located in your downloaded folder. Run this command:
+Teraz musíte postaviť posledného - klienta. Prejdite do priečinka **vagrant_VMs/server**, ktorý sa nachádza v stiahnutom priečinku. Spustite tento príkaz:
 <br />
-*vagrant up*
+*tulák hore*
 <br />
-after a while, you should see the Client in the virtual box. For the first time, you turn off this machine and turn it on again. This is important because for the first time this machine does not connect to the network.
+po chvíli by ste mali vidieť klienta vo virtuálnej schránke. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
 
-## Tasks
-Firstly you need to start the bash script on the client VM. Start the bash start script - start.sh and after a while, the firefox browser should start on. Then visit the attacker website attacker32.com:8080
+## Úlohy
+Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka attacker32.com:8080 <br />
+**Pozor** <br />
+Po 10 minútach sa upravia pravidlá firewallu (zakaze sa pristup na localhost) a daný útok už nebude možné uskutočniť!
 <br /><br />
-On the attacker machine:
-1. Go to rebinding_repo
-2. Copy attacker.com.zone to /etc/bind folder
-3. Copy content of _etc_bind_attacker to /etc/bind/named.conf
-4. Restart bind9 service and check if bind9 is running
-5. Unzip attacker_vm zip
-6. Navigate to attacker_vm folder
-7. Add URL prefix 'attacker32.com' to the change.js file
-8. Restart bind9
+Na útočnom stroji:
+1. Prejdite na rebinding_repo. V tomto adresári sú zobrazené všetky súbory a prostriedky, ktoré budete potrebovať na to aby bol útok úspešný. <br />
+    `cd rebinding_repo`
+2. Skopírujte obsah _etc_bind_attacker do /etc/bind/named.conf. Týmto vytvoríte dve zóny na serveri DNS. Oba tieto súbory zóny sa použijú na iteratívne vyhľadávanie (názvu hostiteľa na IP adresu). <br />
+    *príkazy napríklad:* <br />
+    `cat _etc_bind_attacker+example` -> skopírujte obsah súboru <br />
+    `sudo vi /etc/bind/named.conf` -> vložte obsah do tohto súboru
+3. Skopírujte attacker.com.zone do priečinka /etc/bind. Tento záznam slúži pre iteratívny vyhľadávanie domény attacker32.com. Tu je uložené rozlíšenie DNS. Čitatelia, ktorí sa zaujímajú o syntax súboru zóny, si môžu pozrieť podrobnosti v RFC 1035. <br />
+    `sudo cp attacker.com.zone /etc/bind/`
+4. Reštartujte službu bind9 a skontrolujte či je služba bind9 spustená. Pri každej zmene konfigurácie DNS je potrebné reštartovať server DNS
+    `sudo service bind9 restart` 
+    `sudo service bind9 status` -> ak si ste spravili všetko dobre status by mal byt running
+5. Rozbaľte zip attacker_vm. <br />
+    `sudo unzip attacker_vm`
+6. Prejdite do priečinka attacker_vm. <br />
+    `cd attacker_vm`
+7. Pridajte predponu adresy URL "attacker32.com" do súboru change.js
+    `sudo vi rebind_malware/templates/js/change.js` <br />
+    pridaj tento riadok
+    <details>
+    <summary>Spoiler!</summary>
+    <br />
+      let url_prefix = 'http://www.attacker32.com:8080' 
+    <br />
+    </details>
+8. Reštartujte bind9. <br />
+    `sudo service bind9 restart`
 
-Switch back to the client VM and refresh www.attacker32.com and continue on the attacker machine
+Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači.
 
-9. Change the IP address of www.attacker32.com in the /etc/bind/attacker.com.zone
-10. Restart bind9
+9. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone <br />
+    `sudo vi /etc/bind/attacker.com.zone`
+    <details>
+    <summary>Spoiler!</summary>
+    <br />
+      www     IN      A       &lt;ip_addr Client&gt; 
+    <br />
+    </details>
+10. Reštartujte bind9. <br />
+    `sudo service bind9 restart`
 
-### Resources
+### Zdroje
 https://seedsecuritylabs.org/Labs_16.04/PDF/DNS_Rebinding.pdf
