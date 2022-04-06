@@ -75,5 +75,5 @@ Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na ú
 10. Reštartujte bind9. <br />
     `sudo service bind9 restart`
 
-### Zdroje
+### Zdroje 
 https://seedsecuritylabs.org/Labs_16.04/PDF/DNS_Rebinding.pdf
