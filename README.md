@@ -1,33 +1,33 @@
 # bp-DNS_Rebinding
 
-Tu si môžete stiahnuť virtuálne počítače a zdroje, ktoré potrebujete na spustenie opätovného naviazania útoku.
+Tu si môžete stiahnuť virtuálne počítače a zdroje, ktoré potrebujete na vykonanie útoku DNS previazanie.
 
 ## Úvod
-V tomto laboratóriu by študenti mali získať prvé skúsenosti s tým, ako používať techniku rebindingu DNS na útok na zariadenia internetu vecí. V súbore topology.png môžete vidieť, že toto laboratórium obsahuje 4 virtuálne stroje. Prvý je router s IP adresou 10.10.30.1, druhý je klient (obeť) s IP adresou 10.10.30.5, tretí je útočník (vy) s 10.10.30.6 a posledný je server s IP adresou 10.10.30.7 . Vašou úlohou je získať prístup k teplomeru, ktorý beží na virtuálnom stroji klienta, a nastaviť teplotu.
+V tomto laboratóriu by študenti mali získať prvé skúsenosti s tým, ako používať techniku previazania DNS na útok na zariadenia internetu vecí. V súbore topology.png môžete vidieť, že toto laboratórium obsahuje 4 virtuálne stroje. Prvý je router s IP adresou 10.10.30.1, druhý je klient (obeť) s IP adresou 10.10.30.5, tretí je útočník (vy) s 10.10.30.6 a posledný je server s IP adresou 10.10.30.7 . Vašou úlohou je získať prístup k termostatu, ktorý beží na virtuálnom stroji klienta, a nastaviť na ňom teplotu.
 
 ## Ako funguje previazanie DNS
 Útok sa zameriava na zariadenia internetu vecí (IoT). Mnohé z nich nemajú veľmi prepracované systémy ochrany. Ak sa útočníkovi podarí komunikovať s týmito IoT zariadeniami, pravdepodobne bude môcť zneužiť zraniteľnosť týchto zariadení.
 ##### Firewall -
-Útočník nemôže priamo pristupovať k zariadeniu IoT a ak by chcel, bude zablokovaný firewallom, pretože toto zariadenie IoT je súkromná IP adresa, ktorá nie je prístupná zvonku. Jediný spôsob, ako môže útočník získať prístup k tomuto zariadeniu internetu vecí, je komunikovať so zariadením internetu vecí z miestneho prostredia. Útočník musí byť v rovnakej sieti za bránou firewall, aby sa k nej mohol dostať. Tento problém by sa dal vyriešiť tak, že klient navštívi webovú stránku útočníka. Čo musí útočník urobiť, je poslať používateľovi e-mail alebo reklamu a ak používateľ klikne na daný odkaz, prejde na webovú stránku útočníka.
+útočník nemôže priamo pristupovať k zariadeniu IoT a ak by chcel, bude zablokovaný firewallom, pretože toto zariadenie IoT je súkromná IP adresa, ktorá nie je prístupná zvonku. Jediný spôsob, ako môže útočník získať prístup k tomuto zariadeniu internetu vecí, je komunikovať so zariadením internetu vecí z miestneho prostredia. Útočník musí byť v rovnakej sieti za bránou firewall, aby sa k nej mohol dostať. Tento problém by sa dal vyriešiť tak, že klient navštívi webovú stránku útočníka. Čo musí útočník urobiť, je poslať používateľovi e-mail alebo reklamu a ak používateľ klikne na daný odkaz, prejde na webovú stránku útočníka.
 ##### The same origin policy -
-zaisťuje, že používateľ môže komunikovať so svojím serverom. Pre IoT zariadenie (termostat) uvedieme príklad webovej stránky s názvom termostat.com. Vďaka politike rovnakého pôvodu bude termostat schopný komunikovať s termostat.com. Ak však útočník použije svoju stránku (attacker.com) na pokus o komunikáciu so serverom internetu vecí, ide o požiadavku z dvoch rôznych zdrojov. Je to preto, že útočník používa stránky attacker.com a termostat termostat.com. Prehliadač preto útočníkovi neumožňuje získať údaje. Treba si však uvedomiť jednu vec. Politika rovnakého pôvodu kontroluje iba mená, nie adresy IP. Ak by teda používateľ získal IP adresu veci, termostatu, vedel by si na ňom nastaviť teplotu.
+zaisťuje, že používateľ môže komunikovať so svojím serverom. Pre IoT zariadenie (termostat) uvedieme príklad webovej stránky s názvom thermostat.com. Vďaka politike rovnakého pôvodu bude termostat schopný komunikovať s thermostat.com. Ak však útočník použije svoju stránku (attacker.com) na pokus o komunikáciu so serverom internetu vecí, ide o požiadavku z dvoch rôznych zdrojov. Je to preto, že útočník používa stránku attacker.com a termostat thermostat.com. Prehliadač preto útočníkovi neumožňuje získať údaje. Treba si však uvedomiť jednu vec. Politika rovnakého pôvodu kontroluje iba mená, nie IP adresy. Ak by teda používateľ získal IP adresu veci, termostatu vedel by si na ňom nastaviť teplotu.
 
 ## Inštalácia
-Najprv musíte skopírovať toto úložisko do počítača. Po stiahnutí prejdite do priečinka a prejdite do priečinka **muni-kypo_VMs**. Spustite tento príkaz:
+Najprv musíte skopírovať tento repozitár do vášho počítača. Po stiahnutí prejdite do priečinka kde ste si ho rozhodli naklonovať a vstúpte do priečinka **muni-kypo_VMs**. Spustite tento príkaz:
 <br />
 *create-sandbox --provisioning-dir ./provisioning ./rebinding.yml*
 <br />
-toto by malo vytvoriť prechodnú definíciu karantény. Prejdite do priečinka **sandbox** a spustite tento príkaz:
+toto by malo vytvoriť prechodnú definíciu sandboxu. Prejdite do priečinka **sandbox** a spustite tento príkaz:
 <br />
-*spravovať vytvorenie karantény*
+*manage-sandbox build*
 <br />
-po chvíli sa vo virtuálnom boxe zobrazia tri virtuálne stroje - router, server-wan a útočník.
+po chvíli sa vo virtual boxe zobrazia tri virtuálne stroje - router, server-wan a útočník.
 <br />
-Teraz musíte postaviť posledného - klienta. Prejdite do priečinka **vagrant_VMs/server**, ktorý sa nachádza v stiahnutom priečinku. Spustite tento príkaz:
+Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_VMs/server**, ktorý sa nachádza v stiahnutom priečinku. Spustite tento príkaz:
 <br />
-*tulák hore*
+*vagrant up*
 <br />
-po chvíli by ste mali vidieť klienta vo virtuálnej schránke. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
+po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
 
 ## Úlohy
 Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka attacker32.com:8080 <br />
@@ -64,7 +64,7 @@ Na útočnom stroji:
 
 Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači.
 
-9. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone <br />
+9. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníka ale na klienta. Vďaka tomu sa teraz požiadavka bude posielať na klientovu IP adresu a útočník bude môcť zmeniť teplotu na termostate. <br />
     `sudo vi /etc/bind/attacker.com.zone`
     <details>
     <summary>Spoiler!</summary>
