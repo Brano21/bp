@@ -50,7 +50,7 @@ Na útočnom stroji:
     `sudo unzip attacker_vm`
 6. Prejdite do priečinka attacker_vm. <br />
     `cd attacker_vm`
-7. Pridajte predponu adresy URL "attacker32.com" do súboru change.js
+7. Pridajte predponu adresy URL "attacker32.com" do súboru change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate.
     `sudo vi rebind_malware/templates/js/change.js` <br />
     pridaj tento riadok
     <details>
@@ -64,7 +64,7 @@ Na útočnom stroji:
 
 Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači.
 
-9. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníka ale na klienta. Vďaka tomu sa teraz požiadavka bude posielať na klientovu IP adresu a útočník bude môcť zmeniť teplotu na termostate. <br />
+9. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníkovu IP ale na klientovu IP. Vďaka tomu bude sa požiadavka pošle na klientovu IP adresu a teda útočník bude môcť zmeniť teplotu na termostate a útok bude úspešný. <br />
     `sudo vi /etc/bind/attacker.com.zone`
     <details>
     <summary>Spoiler!</summary>
