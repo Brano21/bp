@@ -3,7 +3,7 @@
 Tu si môžete stiahnuť virtuálne počítače a zdroje, ktoré potrebujete na spustenie opätovného naviazania útoku.
 
 ## Úvod
-V tomto laboratóriu by študenti mali získať prvé skúsenosti s tým, ako používať techniku ​​rebindingu DNS na útok na zariadenia internetu vecí. V súbore topology.png môžete vidieť, že toto laboratórium obsahuje 4 virtuálne stroje. Prvý je router s IP adresou 10.10.30.1, druhý je klient (obeť) s IP adresou 10.10.30.5, tretí je útočník (vy) s 10.10.30.6 a posledný je server s IP adresou 10.10.30.7 . Vašou úlohou je získať prístup k teplomeru, ktorý beží na virtuálnom stroji klienta, a nastaviť teplotu.
+V tomto laboratóriu by študenti mali získať prvé skúsenosti s tým, ako používať techniku rebindingu DNS na útok na zariadenia internetu vecí. V súbore topology.png môžete vidieť, že toto laboratórium obsahuje 4 virtuálne stroje. Prvý je router s IP adresou 10.10.30.1, druhý je klient (obeť) s IP adresou 10.10.30.5, tretí je útočník (vy) s 10.10.30.6 a posledný je server s IP adresou 10.10.30.7 . Vašou úlohou je získať prístup k teplomeru, ktorý beží na virtuálnom stroji klienta, a nastaviť teplotu.
 
 ## Ako funguje previazanie DNS
 Útok sa zameriava na zariadenia internetu vecí (IoT). Mnohé z nich nemajú veľmi prepracované systémy ochrany. Ak sa útočníkovi podarí komunikovať s týmito IoT zariadeniami, pravdepodobne bude môcť zneužiť zraniteľnosť týchto zariadení.
