@@ -55,9 +55,8 @@ Na útočnom stroji:
  
 V ďaľších krokoch používaj nové terminálové okno <br />
 
-8. Pridajte predponu adresy URL "attacker32.com" do súboru change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate. Ako si budete môcť všimnúť po vykonaní nižšie priloženého príkazu máme na prvom riadku v súbore povolený url prefix 'http://www.seediot32.com:8080'. Skúste sa zamyslieť akú doménu by sme mali na miesto nej použiť kedže viete názov útočníkovej - navštevuje ju klient. <br />
+8. Použite URL adresu útočníkovho servera "attacker32.com" v súbore change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate. Ako si budete môcť všimnúť po vykonaní nižšie priloženého príkazu máme na prvom riadku v súbore povolený url prefix 'http://www.seediot32.com:8080'. V tekejto konfigurácií sa teda požiadavka z útočníkovho servera posiela na server IoT zariadenia. Rovnaká politika pôvovodu teda nie je dodržaná a takéto nastavenie nie je správne. <br />
     `sudo vi rebind_malware/templates/js/change.js` <br />
-    pridaj tento riadok
     <details>
     <summary>Spoiler!</summary>
     <br />
