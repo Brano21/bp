@@ -78,6 +78,7 @@ Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na ú
     </details>
 11. Reštartujte bind9. <br />
     `sudo service bind9 restart` <br />
+
 **Výsledok**
 Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie tepolty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 10 minút odzačiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
 
