@@ -30,7 +30,7 @@ Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_
 po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
 
 ## Úlohy
-Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka attacker32.com:8080 <br />
+Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka  http://www.attacker32.com:8080 <br />
 **Pozor** <br />
 Po 10 minútach sa upravia pravidlá firewallu (zakaze sa pristup na localhost) a daný útok už nebude možné uskutočniť!
 <br /><br />
@@ -50,7 +50,7 @@ Na útočnom stroji:
     `sudo unzip attacker_vm`
 6. Prejdite do priečinka attacker_vm. <br />
     `cd attacker_vm`
-7. Spustite útočníkov web server <br />
+7. Spustite útočníkov web server. <br />
     `FLASK_APP=rebind_malware flask run --host 0.0.0.0 --port 8080` <br />
  
 V ďaľších krokoch používaj nové terminálové okno <br />
