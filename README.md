@@ -30,9 +30,9 @@ Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_
 po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
 
 ## Úlohy
-Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka  http://www.attacker32.com:8080 <br />
+Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka  http://www.attacker32.com:8080. Táto stránka sa vám však ešte nenačíta, to preto lebo sme ju zatiaľ nespustili. To prevedieme v nasledujúcich krokoch. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webowú stránku by vedeľ útočník poslať napríklad pomocou mailu alebo ako reklamu. <br />
 **Pozor** <br />
-Po 10 minútach sa upravia pravidlá firewallu (zakaze sa pristup na localhost) a daný útok už nebude možné uskutočniť!
+Po 10 minútach sa upravia pravidlá firewallu (zakaze sa pristup na localhost) a daný útok už nebude možné uskutočniť! Vy (útočník) máte teda len necelých 10 minút kým si klient všimne chybu v konfigurácii svojho firewallu a upravý pravidlá firewallu pre jeho IP adresu čo bude mať za následok to že útok nebude možné uskutočniť.
 <br /><br />
 Na útočnom stroji:
 1. Prejdite na rebinding_repo. V tomto adresári sú zobrazené všetky súbory a prostriedky, ktoré budete potrebovať na to aby bol útok úspešný. <br />
@@ -50,12 +50,12 @@ Na útočnom stroji:
     `sudo unzip attacker_vm`
 6. Prejdite do priečinka attacker_vm. <br />
     `cd attacker_vm`
-7. Spustite útočníkov web server. <br />
+7. Spustite útočníkov web server. Po použití tohoto príkazu bude možné následne načítať webovú stránku u klienta. <br />
     `FLASK_APP=rebind_malware flask run --host 0.0.0.0 --port 8080` <br />
  
 V ďaľších krokoch používaj nové terminálové okno <br />
 
-8. Pridajte predponu adresy URL "attacker32.com" do súboru change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate. <br />
+8. Pridajte predponu adresy URL "attacker32.com" do súboru change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate. Ako si budete môcť všimnúť po vykonaní nižšie priloženého príkazu máme na prvom riadku v súbore povolený url prefix 'http://www.seediot32.com:8080'. Skúste sa zamyslieť akú doménu by sme mali na miesto nej použiť kedže viete názov útočníkovej - navštevuje ju klient. <br />
     `sudo vi rebind_malware/templates/js/change.js` <br />
     pridaj tento riadok
     <details>
@@ -67,7 +67,7 @@ V ďaľších krokoch používaj nové terminálové okno <br />
 9. Reštartujte bind9. <br />
     `sudo service bind9 restart`
 
-Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači.
+Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači. 
 
 10. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníkovu IP ale na klientovu IP. Vďaka tomu bude sa požiadavka pošle na klientovu IP adresu a teda útočník bude môcť zmeniť teplotu na termostate a útok bude úspešný. <br />
     `sudo vi /etc/bind/attacker.com.zone`
