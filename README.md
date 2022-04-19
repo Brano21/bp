@@ -23,7 +23,7 @@ toto by malo vytvoriť prechodnú definíciu sandboxu. Prejdite do priečinka **
 <br />
 po chvíli sa vo virtual boxe zobrazia tri virtuálne stroje - router, server-wan a útočník.
 <br />
-Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_VMs/server**, ktorý sa nachádza v stiahnutom priečinku. Spustite tento príkaz:
+Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_VMs/client**, ktorý sa nachádza v stiahnutom priečinku. Spustite tento príkaz:
 <br />
 *vagrant up*
 <br />
