@@ -44,8 +44,8 @@ Na útočnom stroji:
 3. Skopírujte attacker.com.zone do priečinka /etc/bind. Tento záznam slúži pre iteratívny vyhľadávanie domény attacker32.com. Tu je uložené rozlíšenie DNS. Čitatelia, ktorí sa zaujímajú o syntax súboru zóny, si môžu pozrieť podrobnosti v RFC 1035. <br />
     `sudo cp attacker.com.zone /etc/bind/`
 4. Reštartujte službu bind9 a skontrolujte či je služba bind9 spustená. Pri každej zmene konfigurácie DNS je potrebné reštartovať server DNS
-    `sudo service bind9 restart`  <br />
-    `sudo service bind9 status` -> ak si ste spravili všetko dobre status by mal byt running
+    `sudo systemctl restart named`  <br />
+    `sudo systemctl status named` -> ak si ste spravili všetko dobre status by mal byt running
 5. Rozbaľte zip attacker_vm. <br />
     `sudo unzip attacker_vm`
 6. Prejdite do priečinka attacker_vm. <br />
@@ -64,7 +64,7 @@ V ďaľších krokoch používaj nové terminálové okno <br />
     <br />
     </details>
 9. Reštartujte bind9. <br />
-    `sudo service bind9 restart`
+    `sudo systemctl restart named`
 
 Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači. 
 
@@ -77,7 +77,7 @@ Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na ú
     <br />
     </details>
 11. Reštartujte bind9. <br />
-    `sudo service bind9 restart` <br />
+    `sudo systemctl restart named` <br />
 
 **Výsledok** <br />
 Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie tepolty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 10 minút odzačiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
