@@ -32,14 +32,14 @@ po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj v
 ## Úlohy
 Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka  http://www.attacker32.com:8080. Táto stránka sa vám však ešte nenačíta, to preto lebo sme ju zatiaľ nespustili. To prevedieme v nasledujúcich krokoch. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webowú stránku by vedeľ útočník poslať napríklad pomocou mailu alebo ako reklamu. <br />
 **Pozor** <br />
-Po 10 minútach sa upravia pravidlá firewallu (zakaze sa pristup na localhost) a daný útok už nebude možné uskutočniť! Vy (útočník) máte teda len necelých 10 minút kým si klient všimne chybu v konfigurácii svojho firewallu a upravý pravidlá firewallu pre jeho IP adresu čo bude mať za následok to že útok nebude možné uskutočniť.
+Po 20 minútach sa upravia pravidlá firewallu (zakaze sa pristup na localhost) a daný útok už nebude možné uskutočniť! Vy (útočník) máte teda len necelých 20 minút kým si klient všimne chybu v konfigurácii svojho firewallu a upraví pravidlá firewallu pre jeho IP adresu čo bude mať za následok to že útok nebude možné uskutočniť.
 <br /><br />
 Na útočnom stroji:
 1. Prejdite na rebinding_repo. V tomto adresári sú zobrazené všetky súbory a prostriedky, ktoré budete potrebovať na to aby bol útok úspešný. <br />
     `cd rebinding_repo`
 2. Skopírujte obsah _etc_bind_attacker do /etc/bind/named.conf. Týmto vytvoríte dve zóny na serveri DNS. Oba tieto súbory zóny sa použijú na iteratívne vyhľadávanie (názvu hostiteľa na IP adresu). <br />
     *príkazy napríklad:* <br />
-    `cat _etc_bind_attacker+example` -> skopírujte obsah súboru <br />
+    `cat _etc_bind_attacker` -> skopírujte obsah súboru <br />
     `sudo vi /etc/bind/named.conf` -> vložte obsah do tohto súboru
 3. Skopírujte attacker.com.zone do priečinka /etc/bind. Tento záznam slúži pre iteratívny vyhľadávanie domény attacker32.com. Tu je uložené rozlíšenie DNS. Čitatelia, ktorí sa zaujímajú o syntax súboru zóny, si môžu pozrieť podrobnosti v RFC 1035. <br />
     `sudo cp attacker.com.zone /etc/bind/`
@@ -53,7 +53,7 @@ Na útočnom stroji:
 7. Spustite útočníkov web server. Po použití tohoto príkazu bude možné následne načítať webovú stránku u klienta. <br />
     `FLASK_APP=rebind_malware flask run --host 0.0.0.0 --port 8080` <br />
  
-V ďaľších krokoch používaj nové terminálové okno <br />
+V ďaľších krokoch používaj nové terminálové okno, flask je potrebné mať naďalej spustený! <br />
 
 8. Použite URL adresu útočníkovho servera "attacker32.com" v súbore change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate. Ako si budete môcť všimnúť po vykonaní nižšie priloženého príkazu máme na prvom riadku v súbore povolený url prefix 'http://www.seediot32.com:8080'. V tekejto konfigurácií sa teda požiadavka z útočníkovho servera posiela na server IoT zariadenia. Rovnaká politika pôvovodu teda nie je dodržaná a takéto nastavenie nie je správne. <br />
     `sudo vi rebind_malware/templates/js/change.js` <br />
@@ -80,7 +80,7 @@ Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na ú
     `sudo systemctl restart named` <br />
 
 **Výsledok** <br />
-Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie tepolty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 10 minút odzačiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
+Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie tepolty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 20 minút odzačiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
 
 ### Zdroje 
 https://seedsecuritylabs.org/Labs_16.04/PDF/DNS_Rebinding.pdf
