@@ -34,7 +34,7 @@ Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_
 po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
 
 ## Úlohy
-Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh (./start.sh) a po chvíli by sa mal spustiť prehliadač firefox. Môže sa stať že sa neotvorí útočníkova webová stránka. V takom prípade navštívte danú webovú stránku http://www.attacker32.com:8080. Táto stránka sa vám však ešte nenačíta, to preto lebo sme ju zatiaľ nespustili. To prevedieme v nasledujúcich krokoch. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. <br />
+Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh (./start.sh) a po chvíli by sa mal spustiť prehliadač firefox. V ňom bude zapnutý seedIoT webstránka kde budete môcť vidieť thermometer - IoT zariadenie. <br />
 **Pozor** <br />
 Po 20 minútach sa upravia pravidlá firewallu (zakáže sa prístup na localhost) a daný útok už nebude možné uskutočniť! Vy (útočník) máte teda len necelých 20 minút kým si klient všimne chybu v konfigurácii svojho firewallu a upraví pravidlá firewallu pre jeho IP adresu čo bude mať za následok to že zablokuje útok.
 <br /><br />
@@ -71,7 +71,7 @@ V ďalších krokoch používaj nové terminálové okno, flask je potrebné ma�
 9. Reštartujte bind9. <br />
     `sudo systemctl restart named`
 
-Prepnite späť na klientsky VM a obnovte www.attacker32.com a pokračujte na útočníkovom počítači. 
+Prepnite späť do klientsky VM. Teraz zapnite novú kartu firefox a vyhľadajte webovú stránku http://www.attacker32.com:8080. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. Následne pokračujte na útočníkovom počítači. 
 
 10. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníkovu IP ale na klientovu IP. Vďaka tomu bude sa požiadavka pošle na klientovu IP adresu a teda útočník bude môcť zmeniť teplotu na termostate a útok bude úspešný. <br />
     `sudo vi /etc/bind/attacker.com.zone`
