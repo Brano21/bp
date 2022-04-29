@@ -34,7 +34,7 @@ Teraz musíte vytvoriť posledného - klienta. Prejdite do priečinka **vagrant_
 po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj vypnete a znova zapnete. Je to dôležité, pretože toto zariadenie sa prvýkrát nepripojí k sieti.
 
 ## Úlohy
-Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh a po chvíli by sa mal spustiť prehliadač firefox. Potom navštívte webovú stránku útočníka  http://www.attacker32.com:8080. Táto stránka sa vám však ešte nenačíta, to preto lebo sme ju zatiaľ nespustili. To prevedieme v nasledujúcich krokoch. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. <br />
+Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh (./start.sh) a po chvíli by sa mal spustiť prehliadač firefox. Môže sa stať že sa neotvorí útočníkova webová stránka. V takom prípade navštívte danú webovú stránku http://www.attacker32.com:8080. Táto stránka sa vám však ešte nenačíta, to preto lebo sme ju zatiaľ nespustili. To prevedieme v nasledujúcich krokoch. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. <br />
 **Pozor** <br />
 Po 20 minútach sa upravia pravidlá firewallu (zakáže sa prístup na localhost) a daný útok už nebude možné uskutočniť! Vy (útočník) máte teda len necelých 20 minút kým si klient všimne chybu v konfigurácii svojho firewallu a upraví pravidlá firewallu pre jeho IP adresu čo bude mať za následok to že zablokuje útok.
 <br /><br />
