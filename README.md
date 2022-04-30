@@ -58,7 +58,7 @@ Prihlasovacie údaje sú kali:kali.
 7. Spustite útočníkov web server. Po použití tohoto príkazu bude možné následne načítať webovú stránku u klienta. <br />
     `FLASK_APP=rebind_malware flask run --host 0.0.0.0 --port 8080` <br />
     
-Prepnite späť do klientsky VM. Teraz zapnite novú kartu Firefox a vyhľadajte webovú stránku http://www.attacker32.com:8080/change. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. Následne pokračujte na útočníkovom počítači. V nasledujúcich krokoch by som chcel demonštrovať princíp fungovania politiky rovnakého pôvodu. <br />
+Prepnite späť do klientsky VM. Teraz zapnite novú kartu Firefox a vyhľadajte webovú stránku http://www.attacker32.com:8080/change. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. V nasledujúcich krokoch by som chcel demonštrovať princíp fungovania politiky rovnakého pôvodu. <br />
 
 Vo Firefoxe kliknite na Tools -> Web Developer -> Web Console. Ak následne kliknete na button mal by sa vám zobraziť upozornenie o cross-origin policy.  
 Prepnite sa späť na útočníkov počítač a v ďalších krokoch používajte nové terminálové okno, flask je potrebné mať naďalej spustený! <br />
