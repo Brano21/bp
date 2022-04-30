@@ -57,8 +57,11 @@ Prihlasovacie údaje sú kali:kali.
     `cd attacker_vm`
 7. Spustite útočníkov web server. Po použití tohoto príkazu bude možné následne načítať webovú stránku u klienta. <br />
     `FLASK_APP=rebind_malware flask run --host 0.0.0.0 --port 8080` <br />
- 
-V ďalších krokoch používaj nové terminálové okno, flask je potrebné mať naďalej spustený! <br />
+    
+Prepnite späť do klientsky VM. Teraz zapnite novú kartu Firefox a vyhľadajte webovú stránku http://www.attacker32.com:8080/change. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. Následne pokračujte na útočníkovom počítači. V nasledujúcich krokoch by som chcel demonštrovať princíp fungovania politiky rovnakého pôvodu. <br />
+
+Vo Firefoxe kliknite na Tools -> Web Developer -> Web Console. Ak následne kliknete na button mal by sa vám zobraziť upozornenie o cross-origin policy.  
+Prepnite sa späť na útočníkov počítač a v ďalších krokoch používajte nové terminálové okno, flask je potrebné mať naďalej spustený! <br />
 
 8. Použite URL adresu útočníkovho servera "attacker32.com" v súbore change.js. Pomocou toho dodržíme rovnakú politiku pôvodu a budeme môcť odoslať požiadavku na zmenu teploty na termostate. Ako si budete môcť všimnúť po vykonaní nižšie priloženého príkazu máme na prvom riadku v súbore povolený url prefix 'http://www.seediot32.com:8080'. V takejto konfigurácií sa teda požiadavka z útočníkovho servera posiela na server IoT zariadenia. Rovnaká politika pôvodu teda nie je dodržaná a takéto nastavenie nie je správne. <br />
     `sudo vi rebinding_repo/attacker_vm/rebind_malware/templates/js/change.js` <br />
@@ -70,8 +73,8 @@ V ďalších krokoch používaj nové terminálové okno, flask je potrebné ma�
     </details>
 9. Reštartujte bind9. <br />
     `sudo systemctl restart named`
-
-Prepnite späť do klientsky VM. Teraz zapnite novú kartu firefox a vyhľadajte webovú stránku http://www.attacker32.com:8080. Samozrejme v reálnom svete by používateľ dobrovoľne na takúto web stránku nevstúpi. Ako už ale poznamenané na začiatku, túto webovú stránku by vedel útočník poslať napríklad pomocou mailu alebo ako reklamu. Následne pokračujte na útočníkovom počítači. 
+    
+Ak teraz na klientovej VM skúsite kliknúť na button tak by sa vám nemalo v konzole ukazovať upozornenie o cross-origin policy.
 
 10. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníkovu IP ale na klientovu IP. Vďaka tomu bude sa požiadavka pošle na klientovu IP adresu a teda útočník bude môcť zmeniť teplotu na termostate a útok bude úspešný. <br />
     `sudo vi /etc/bind/attacker.com.zone`
@@ -83,9 +86,12 @@ Prepnite späť do klientsky VM. Teraz zapnite novú kartu firefox a vyhľadajte
     </details>
 11. Reštartujte bind9. <br />
     `sudo systemctl restart named` <br />
+ 
+ Prepnite sa späť do klientovej VM. Opäť kliknite na button a tentokrát sa teplota na termostate zmení. Ak by ste chcel zautomatizovať útok vymažte z URL adresy /change. 
+ !*Poznámka:* nezabudnite však predtým znova zmeniť IP adresu v súbore zóny pre attacker.com.zone na svoju - najprv sa totiž musí načítať obsah vašej (útočníkovej) stránky a až potom môžete skúsiť samotné DNS previazanie.
 
 **Výsledok** <br />
-Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie tepolty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 20 minút od začiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
+Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie teploty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 20 minút od začiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
 
 ### Zdroje 
 https://seedsecuritylabs.org/Labs_16.04/PDF/DNS_Rebinding.pdf
