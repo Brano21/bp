@@ -74,7 +74,7 @@ Prepnite sa späť na útočníkov počítač a v ďalších krokoch používajt
 9. Reštartujte bind9. <br />
     `sudo systemctl restart named`
     
-Ak teraz na klientovej VM skúsite kliknúť na button tak by sa vám nemalo v konzole ukazovať upozornenie o cross-origin policy.
+Ak teraz na klientovej VM znova načítate stránku http://www.attacker32.com:8080/change a následne skúsite kliknúť na button tak by sa vám nemalo v konzole ukazovať upozornenie o cross-origin policy.
 
 10. Zmeňte IP adresu www.attacker32.com v /etc/bind/attacker.com.zone aby sa požiadavka na zmenu teploty neposielala na útočníkovu IP ale na klientovu IP. Vďaka tomu bude sa požiadavka pošle na klientovu IP adresu a teda útočník bude môcť zmeniť teplotu na termostate a útok bude úspešný. <br />
     `sudo vi /etc/bind/attacker.com.zone`
