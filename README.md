@@ -37,6 +37,7 @@ po chvíli by ste mali vidieť klienta vo virtual boxe. Prvýkrát tento stroj v
 Najprv musíte spustiť bash skript na klientovej VM. Spustite skript v bash - start.sh (`./start.sh`) a po chvíli by sa mal spustiť prehliadač firefox. V ňom bude zapnutý seedIoT webstránka kde budete môcť vidieť termometer - IoT zariadenie. <br />
 **Pozor** <br />
 Po 20 minútach sa upravia pravidlá firewallu (zakáže sa prístup na localhost) a daný útok už nebude možné uskutočniť! Vy (útočník) máte teda len necelých 20 minút kým si klient všimne chybu v konfigurácii svojho firewallu a upraví pravidlá firewallu pre jeho IP adresu čo bude mať za následok to že zablokuje útok.
+*Poznámka:* Ak sa vám nepodarí vykonať útok v stanovenom čase bude potrebné daný virtuáln stroj opäť vrátiť do pôvodného - "zraniteľného" stavu. Klientovu VM bude preto potrebné zničiť a nanovo vybuildovať. **
 <br /><br />
 Na útočnom stroji:
 Prihlasovacie údaje sú kali:kali. 
@@ -92,6 +93,9 @@ Ak teraz na klientovej VM znova načítate stránku http://www.attacker32.com:80
 
 **Výsledok** <br />
 Teraz prejdite na klientov stroj. Každých 10 sekúnd sa odošle požiadavka na zvýšenie teploty na 88 stupňov. Ak  sa prekliknete na http://www.seediot32.com:8080 mali by ste vidieť výsledok vášho útoku - teplota je nastavená na 88 stupňov. Ak ju znížite tak opäť po prejdení 10 sekundového cyklu tak by sa mala opäť zmeniť. Samozrejme takto by stránka útočníka v reálnom svete nevyzerala, toto by bol v skutočnosti len skript ktorý by bežal na pozadí. Ak prejde aj spomínaných 20 minút od začiatku tak môžete skúsiť otestovať obranu, po prejdení 10 sekundového cyklu a odoslaní požiadavky sa už teplota nezmení, ostane nastavená tak ako bola.
+
+**
+Stretnete sa s problémom kedy vám vagrant bude vypisovať že daný názov virtuálky už vo VB existuje, preto bude potrebné vymazať daný súbor v priečinku VB a až potom bude možné opätovne vybudovať klientovu VM príkazom - *vagrant up*.
 
 ### Zdroje 
 https://seedsecuritylabs.org/Labs_16.04/PDF/DNS_Rebinding.pdf
