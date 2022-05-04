@@ -18,7 +18,7 @@ V prvom rade by musel klient navštíviť stránku útočníka (1). Ako môžeme
 Predpokladajme že útočníkovi sa už podarilo získať IP adresu termostatu.
 Následne ak by útočník pozmenil adresu svojho web servera na 1.2.1.3 (2) čo je adresa termostatu vedel by nastaviť teplotu na danom termostate (4). To preto lebo politika rovnakého pôvodu mu to dovoľuje. Útočník totiž stále posiela danú požiadavku z utocnik.com na utocnik.com avšak nie už na IP adresu 1.2.2.4 ale na 1.2.1.3 čo je IP adresa termostatu.
 Čo je veľmi dôležité pri tomto útoku je aby TTL na útočníkovej stránke bol čo najmenší. Ak by sa totiž stránka vo vyrovnávacej pamäti uložila na veľmi dlho, útočník by síce vykonal zmenu IP adresy ale samotný záznam by sa načítal z vyrovnávacej pamäti. Požiadavka by sa teda posielala na útočníkov server a to by nemalo žiaden význam. Preto je dôležité aby v prvom rade klient navštívil pravú stránku útočníka a načítal sa mu obsah stránky, pričom TTL by bolo nastavené na čo najmenej, napríklad 10 sekúnd. Ak by klient chcel naďalej používať túto stránku muselo by sa opäť vykonať iteratívny preklad pretože po 10 sekundách by sa už záznam nenachádzal vo vyrovnávacej pamäti (3). To je dostatok času na to aby zatiaľ útočník zmenil na svojom servery IP adresu z originálnej 1.2.2.4 na IP adresu termostatu 1.2.1.3.
-![DNS previazanie](./DNS_previazanie-utok.png)
+![DNS previazanie](./DNS-previazanie_utok.png)
 Útočník sa pri tomto útoku zameriava na answer sekciu v časti DNS paketu. Namiesto toho, aby útočník poskytol svoju skutočnú IP adresu, poskytne IP adresu IoT zariadenia. Používa rovnaký názov čiže politika rovnakého pôvodu je dodržaná ale IP adresa je premapovaná na IoT zariadenie a útočník môže komunikovať s týmto zariadením.
 
 ## Inštalácia CSC
